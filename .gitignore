@@ -1,0 +1,9 @@
+# Enunciado do professor (nao faz parte da entrega)
+*.pdf
+
+# Notas de planejamento (uso pessoal, nao faz parte da entrega)
+docs/
+
+# Arquivos temporarios
+*.log
+.DS_Store
