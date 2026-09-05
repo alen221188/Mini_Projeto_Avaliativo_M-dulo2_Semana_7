@@ -124,15 +124,39 @@ praça — e confirmei que o fator de cada loja soma exatamente 1,00.
 
 ## 5. Como reproduzir o banco do zero
 
+### Pré-requisitos (Windows)
+
+- O `psql` precisa estar acessível no terminal. Se o comando `psql --version`
+  der erro de "não reconhecido", adicione a pasta `bin` da instalação do
+  PostgreSQL (ex.: `C:\Program Files\PostgreSQL\18\bin`) na variável de
+  ambiente **Path** do Windows, e abra um terminal novo depois.
+- Os nomes de loja e categoria têm acento, e o terminal do Windows nem sempre
+  lê UTF-8 por padrão — isso pode fazer o `01-carga-staging.sql` carregar
+  **menos linhas do que devia**, sem mostrar erro nenhum. Para evitar isso,
+  rode estes dois comandos **antes** de começar (uma vez por sessão do
+  terminal):
+  ```powershell
+  chcp 65001
+  $env:PGCLIENTENCODING = "UTF8"
+  ```
+- Depois de rodar cada script, é uma boa prática conferir a contagem de
+  linhas da tabela (os números esperados estão na seção 8 do enunciado e em
+  `sql/00-conferencia.sql`) antes de seguir para o próximo.
+
+### Ordem dos scripts
+
 Rode os scripts na pasta `sql/`, nesta ordem, usando o `psql`:
 
 ```bash
-psql -U postgres -d postgres    -f sql/01-carga-staging.sql
-psql -U postgres -d dw_pata_amiga -f sql/02-dimensoes-prontas.sql
-psql -U postgres -d dw_pata_amiga -f sql/03-dimensoes.sql
-psql -U postgres -d dw_pata_amiga -f sql/04-fato.sql
-psql -U postgres -d dw_pata_amiga -f sql/05-perguntas.sql
+psql -U postgres -d postgres    -f sql/01-carga-staging.sql -v ON_ERROR_STOP=1
+psql -U postgres -d dw_pata_amiga -f sql/02-dimensoes-prontas.sql -v ON_ERROR_STOP=1
+psql -U postgres -d dw_pata_amiga -f sql/03-dimensoes.sql -v ON_ERROR_STOP=1
+psql -U postgres -d dw_pata_amiga -f sql/04-fato.sql -v ON_ERROR_STOP=1
+psql -U postgres -d dw_pata_amiga -f sql/05-perguntas.sql -v ON_ERROR_STOP=1
 ```
+
+> `-v ON_ERROR_STOP=1` faz o `psql` parar e mostrar o erro na hora, em vez de
+> pular a linha com problema e seguir em frente silenciosamente.
 
 ## 6. As cinco respostas
 
