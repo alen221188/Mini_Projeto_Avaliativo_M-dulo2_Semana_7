@@ -286,4 +286,4 @@ concluída dentro da janela observada; (3) o faturamento exato da rede, já que
 ## 8. Vídeo de apresentação
 
 Link do vídeo (Google Drive, modo leitor para qualquer pessoa com o link):
-`_(colar o link aqui depois de gravar)_`
+[https://drive.google.com/drive/folders/1K68sU568y9PscSLhGoMtWaToM3CLBqoi](https://drive.google.com/drive/folders/1K68sU568y9PscSLhGoMtWaToM3CLBqoi)
